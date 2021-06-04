@@ -1,6 +1,6 @@
 package ru.usov.testtmpk.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.usov.testtmpk.Entity.Consumer;
 import ru.usov.testtmpk.Repo.ConsumerRepo;
@@ -12,18 +12,12 @@ import java.util.List;
  *
  */
 @Service
+@RequiredArgsConstructor
 public class ConsumerService {
 
     private final ConsumerRepo consumerRepo;
 
 
-    public ConsumerService(ConsumerRepo consumerRepo) {
-        this.consumerRepo = consumerRepo;
-    }
-
-    public void addConsumer(Consumer consumer) {
-        this.consumerRepo.save(consumer);
-    }
 
     public void editConsumer(Consumer consumer) {
         this.consumerRepo.save(consumer);
@@ -34,8 +28,7 @@ public class ConsumerService {
     }
 
     public List<Consumer> consumerList() {
-        List<Consumer> consumers = new ArrayList<>();
-        consumers.addAll(consumerRepo.findAll());
+        List<Consumer> consumers = new ArrayList<>(consumerRepo.findAll());
         return consumers;
     }
 
@@ -43,4 +36,6 @@ public class ConsumerService {
         return consumerRepo.getById(id);
     }
 
+    public void addConsumer(Consumer consumer) { this.consumerRepo.save(consumer);
+    }
 }

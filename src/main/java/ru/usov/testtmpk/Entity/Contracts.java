@@ -26,4 +26,8 @@ public class Contracts {
 
     @OneToMany(targetEntity = TariffsPayments.class)
     private List<TariffsPayments> tariffsPaymentsList;
+
+    public Contracts(Tariffs tariffs) {
+        this.tariffs = tariffs;
+    }
 }

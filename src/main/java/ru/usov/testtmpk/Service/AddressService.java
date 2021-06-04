@@ -1,5 +1,6 @@
 package ru.usov.testtmpk.Service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.usov.testtmpk.Entity.Address;
 import ru.usov.testtmpk.Repo.AddressRepo;
@@ -11,13 +12,11 @@ import java.util.List;
  *
  */
 @Service
+@RequiredArgsConstructor
 public class AddressService {
     
     private final AddressRepo addressRepo;
 
-    public AddressService(AddressRepo addressRepo) {
-        this.addressRepo = addressRepo;
-    }
 
     public void addAddress(Address address) {
         this.addressRepo.save(address);
@@ -32,8 +31,7 @@ public class AddressService {
     }
 
     public List<Address> addressList() {
-        List<Address> addresses = new ArrayList<>();
-        addresses.addAll(addressRepo.findAll());
+        List<Address> addresses = new ArrayList<>(addressRepo.findAll());
         return addresses;
     }
 
